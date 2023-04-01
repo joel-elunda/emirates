@@ -59,11 +59,11 @@ class Profile(models.Model):
         verbose_name = 'Profile d\'utilisateur'
         verbose_name_plural = 'Profile des utilisateurs' 
  
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def create_or_update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+#     instance.profile.save()
     
     
 class UserAddress(models.Model):
