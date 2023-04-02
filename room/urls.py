@@ -15,10 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
 from django.contrib.auth.decorators import login_required
+
+from room.views import (
+    RoomCreateView,
+    RoomListView,
+    RoomDeleteView,
+    RoomUpdateView,
+    RoomDetailView,
+)
 
 app_name = 'room'
 
 urlpatterns = [ 
+    path('create/', RoomCreateView.as_view(), name='create'),
+    path('list/', RoomListView.as_view(), name='list'),
+    path('delete/<int:pk>/', RoomDeleteView.as_view(), name="delete"),
+    path('update/<int:pk>/', RoomUpdateView.as_view(), name='update'),
+    path('details/<int:pk>/', RoomDetailView.as_view(), name='details'),
 ]  

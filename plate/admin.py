@@ -1,3 +1,7 @@
 from django.contrib import admin
+from plate.models import PlateModel
 
-# Register your models here.
+
+@admin.register(PlateModel)
+class PlateModelAdmin(admin.ModelAdmin):
+    pass

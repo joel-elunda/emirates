@@ -18,7 +18,21 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 
+from plate.views import (
+    PlateCreateView,
+    PlateListView,
+    PlateDeleteView,
+    PlateUpdateView,
+    PlateDetailView,
+)
+
+
 app_name = 'plate'
 
 urlpatterns = [ 
+    path('create/', PlateCreateView.as_view(), name='create'),
+    path('list/', PlateListView.as_view(), name='list'),
+    path('delete/<int:pk>/', PlateDeleteView.as_view(), name="delete"),
+    path('update/<int:pk>/', PlateUpdateView.as_view(), name='update'),
+    path('details/<int:pk>/', PlateDetailView.as_view(), name='details'),
 ]  

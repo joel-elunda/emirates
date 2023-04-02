@@ -1,71 +1,10 @@
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 from django.db import models
-from django.urls import reverse  
-from django.contrib.auth.models import User 
-from django.utils import timezone 
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 
-class Profile(models.Model):
-    GENDER = ( 
-        ('F', 'Féminin'),
-        ('M', 'Masculin'),
-    )
-    user = models.OneToOneField(
-        User, 
-        verbose_name='Utilisateur', 
-        on_delete=models.CASCADE, 
-        blank=True, 
-        null=True, 
-        help_text='Ce nom doit être explicite et ne doit comporter que des lettres miniscules') 
-    gender = models.CharField(
-        'Genre',  
-        choices=GENDER, 
-        max_length=20, 
-        blank=True, 
-        null=True,)
-    phone = models.CharField(
-        'Numéro de téléphone', 
-        max_length=20, 
-        blank=True, 
-        null=True,)
-    bio = models.TextField(blank=True, null=True, max_length=100)
-    photo = models.ImageField(
-        'Image', 
-        null=True, 
-        upload_to='users-photos/', 
-        height_field=None, 
-        width_field=None, 
-        max_length=None,
-        blank=True,)
-    address = models.TextField(
-        'Addresse', 
-        max_length=100, 
-        blank=True,  
-        null=True, ) 
-    slug = models.SlugField('slug')
-    created_at = models.DateTimeField(
-        'Date de création', default=timezone.now)
-    updated_at = models.DateTimeField(
-        'Date de modification', auto_now=True)
-    
-
-    def __str__(self): 
-        return  self.user.username
- 
-    class Meta: 
-        managed = True
-        verbose_name = 'Profile d\'utilisateur'
-        verbose_name_plural = 'Profile des utilisateurs' 
- 
-# @receiver(post_save, sender=User)
-# def create_or_update_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#     instance.profile.save()
-    
-    
 class UserAddress(models.Model):
     country = models.CharField(
         'Pays', max_length=60, default="République Démocratique du Congo", blank=True, null=True)
@@ -94,6 +33,44 @@ class UserAddress(models.Model):
 
     def get_absolute_url(self):
         return reverse("UserAddress_detail", kwargs={"pk": self.pk})
+
+
+class Profile(models.Model):
+    GENDER = (
+        ('F', 'Féminin'),
+        ('M', 'Masculin'),
+    )
+
+    user = models.OneToOneField(
+        User, verbose_name='Utilisateur', on_delete=models.CASCADE, blank=True, null=True, )
+    # enterprise = models.ForeignKey(Enterprise, verbose_name='Employé à ', on_delete=models.CASCADE, blank=True, null=True,)
+    # enterprise = main.models.Enterprise()
+    gender = models.CharField('Genre',  choices=GENDER,
+                              max_length=1, blank=True, null=True,)
+    phone = models.CharField('Numéro de téléphone',
+                             max_length=20, blank=True, null=True,)
+    bio = models.TextField(blank=True, null=True, max_length=100)
+    photo = models.ImageField('Image', null=True, upload_to='users-photos/',
+                              height_field=None, width_field=None, max_length=None) 
+    address = models.CharField('Adresse', max_length=50, null=True)
+    slug = models.SlugField(max_length=150, unique=True,
+                            help_text='Unique value for product page URL, created from name.', blank=True, null=True,)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s %s (%s)' % (self.user, self.address, self.phone)
+        # return '%s %s (%s)' % (self.user.first_name, self.user.last_name, self.user.groups.all()[0].name)
+
+    class Meta:
+        managed = True
+        verbose_name = 'Profile d\'utilisateur'
+        verbose_name_plural = 'Profile des utilisateurs'
+
+    def get_absolute_url(self):
+        return reverse("User_detail", kwargs={"pk": self.pk})
+
+
 class CommentModel(models.Model):
     user = models.ForeignKey(
         "accounts.Profile", on_delete=models.CASCADE, null=True, blank=True)
@@ -147,3 +124,4 @@ class NewsletterModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("NewsletterModel_detail", kwargs={"pk": self.pk})
+
