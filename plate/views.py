@@ -30,7 +30,7 @@ class PlateListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["plate"] = PlateModel
+        context["plate"] = PlateModel.objects.all()
         context['user'] = self.request.user
         context['plate_app_list'] = 'Liste de tous les plats'
         return context
@@ -42,8 +42,7 @@ class PlateDeleteView(DeleteView):
     template_view = 'delete.html'
     success_url = reverse_lazy('plate:list')
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["plate"] = PlateModel
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['plate_app_delete'] = "Supprimer le plat"
         return context
@@ -55,8 +54,7 @@ class PlateUpdateView(UpdateView):
     template_view = 'update.html'
     success_url = reverse_lazy('plate:list')
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["plate"] = PlateModel
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['plate_app_update'] = "Mettre à jour les données du plat"
         return context
@@ -67,8 +65,7 @@ class PlateDetailView(DeleteView):
     model = PlateModel
     template_view = 'details.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["plate"] = PlateModel
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['plate_app_details'] = "Détails du plat"
         return context

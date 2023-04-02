@@ -40,9 +40,7 @@ class RoomCreateView(CreateView):
     success_url = reverse_lazy('main:room-create')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        room = self.request.user
-        context['room'] = room
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context["room_create"] = True
         context['room_app_create'] = 'Ajouter une nouvelle chambre'
@@ -57,8 +55,8 @@ class RoomListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        room = self.request.user
-        context['room'] = room
+        rooms = RoomModel.objects.all()
+        context['room'] = rooms
         context['user'] = self.request.user
         context['room_list'] = RoomModel.objects.all()
         context['room_app_list'] = 'Liste de toutes les chambres'
@@ -71,9 +69,7 @@ class RoomDeleteView(DeleteView):
     success_url = reverse_lazy('room:room-list')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        room = self.request.user
-        context['room'] = room
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['room_app_delete'] = "Supprimer la chambre"
         return context
@@ -86,9 +82,7 @@ class RoomUpdateView(UpdateView):
     success_url = reverse_lazy('room:room-list')
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        room = self.request.user
-        context['room'] = room
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['room_app_update'] = "Mettre à jour les données de la chambre à louer"
         return context
@@ -99,9 +93,7 @@ class RoomDetailView(DetailView):
     context_object_name = 'room_details'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        room = self.request.user
-        context['room'] = room
+        context = super().get_context_data(**kwargs) 
         context['user'] = self.request.user
         context['now'] = timezone.now()
         context['room_app_details'] = "Détails de la chambre à louer"

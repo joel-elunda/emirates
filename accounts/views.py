@@ -30,12 +30,12 @@ def login_user(request):
                     login(request, user)
                     return redirect('home')
                 else:
-                    return render(request, 'registration/login.html', context)
+                    return render(request, 'registration/pages-login.html', context)
             else:
-                return render(request, 'registration/login.html', context)
+                return render(request, 'registration/pages-login.html', context)
     else:
         form = LoginForm() 
-    return render(request, 'registration/login.html', locals())
+    return render(request, 'registration/pages-login.html', locals())
 
 def create_account(request):   
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def create_account(request):
             user_first_last_names = name.split(' ')
             
             if user_already_exist(email): 
-                return render(request, 'registration/user_exist.html')
+                return render(request, 'registration/pages-user-exist.html')
             
             else: 
                 user = User.objects.create_user(
@@ -71,10 +71,10 @@ def create_account(request):
                 return redirect('accounts:update-profile')
            
         else:
-                return render(request, 'registration/register.html', locals())
+                return render(request, 'registration/pages-register.html', locals())
     else:
         form = RegisterForm() 
-    return render(request, 'registration/register.html', locals())
+    return render(request, 'registration/pages-register.html', locals())
  
 def update_profile(request): 
     if request.method == 'POST': 
@@ -101,7 +101,7 @@ def update_profile(request):
             form = UpdateProfileForm()
     else: 
         form = UpdateProfileForm()
-    return render(request, 'registration/user_profile.html', locals())
+    return render(request, 'registration/app-profile.html', locals())
  
 def user_already_exist(email): 
     user = User.objects.filter(email=email)
@@ -118,15 +118,15 @@ def newsletter_suscription(request):
         newsletter = NewsletterModel(email=user_email)
         newsletter.save() 
         
-        return render(request, 'registration/newsletter_done.html')
+        return render(request, 'registration/newsletter-done.html')
         
 def profile(request): 
     user = request.user 
     if user: 
         profile = Profile.objects.get(user=user)
-        return render(request, 'registration/profile.html', {'profile': profile}) 
+        return render(request, 'registration/app-profile.html', {'profile': profile}) 
     else: 
-        return render(request, 'registration/user_profile.html')
+        return render(request, 'registration/app-profile.html')
 
 
 

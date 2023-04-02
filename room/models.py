@@ -7,7 +7,7 @@ class RoomModel(models.Model):
     date_start = models.DateField("Date arrivée", auto_now=False, auto_now_add=False, null=True)
     date_end = models.DateField("Date sortie", auto_now=False, auto_now_add=False, null=True)
     nb_child = models.IntegerField("Nombre d'enfants", null=True)
-    nb_adult = models.IntegerField("Nombre d'adultes", null=True)
+    nb_adult = models.IntegerField("Nombre d'adultes", null=True) 
     created_at = models.DateTimeField(auto_created=True)
     updated_at = models.DateTimeField(auto_now=True)
 

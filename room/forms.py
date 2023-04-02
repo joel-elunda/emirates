@@ -16,27 +16,27 @@ class RoomModelForm(forms.ModelForm):
         widgets = {
             'guest' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '',
+                'placeholder': 'Nom du client',
                 'required': True,
             }),
             'date_start' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '',
+                'placeholder': "Date d'arrivée",
                 'required': True,
             }),
             'date_end' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '',
+                'placeholder': 'Date de sortie',
                 'required': True,
             }),
             'nb_child' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '',
+                'placeholder': "Nombre d'enfants",
                 'required': True,
             }),
             'nb_adult'  : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '',
+                'placeholder': "Nombre d'adultes",
                 'required': True,
             }),
         }

@@ -54,7 +54,7 @@ class Profile(models.Model):
                               height_field=None, width_field=None, max_length=None) 
     address = models.CharField('Adresse', max_length=50, null=True)
     slug = models.SlugField(max_length=150, unique=True,
-                            help_text='Unique value for product page URL, created from name.', blank=True, null=True,)
+                            help_text='Valeur unique pour l\'URL de la page produit, créée à partir du nom.', blank=True, null=True,)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

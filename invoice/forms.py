@@ -15,19 +15,15 @@ class InvoiceModelForm(forms.ModelForm):
         widgets = {
             'client': forms.TextInput(attrs= {
                 'class': 'form-control',
-                'placeholder': ''
-            }),
-            'user': forms.TextInput(attrs= {
-                'class': 'form-control',
-                'placeholder': ''
-            }),
+                'placeholder': 'Nom du client'
+            }), 
             'plate': forms.TextInput(attrs= {
                 'class': 'form-control',
-                'placeholder': ''
+                'placeholder': 'Nom du plat'
             }),
             'room': forms.TextInput(attrs= {
                 'class': 'form-control',
-                'placeholder': ''
+                'placeholder': 'Nom de la chambre'
             }),
             
         }
