@@ -18,7 +18,20 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 
+from invoice.views import (
+    InvoiceCreateView,
+    InvoiceListView,
+    InvoiceDeleteView,
+    InvoiceUpdateView,
+    InvoiceDetailView,
+)
+
 app_name = 'invoice'
 
 urlpatterns = [ 
+    path('create/', InvoiceCreateView.as_view(), name='create'),
+    path('list/', InvoiceListView.as_view(), name='list'),
+    path('delete/<int:pk>/', InvoiceDeleteView.as_view(), name="delete"),
+    path('update/<int:pk>/', InvoiceUpdateView.as_view(), name='update'),
+    path('details/<int:pk>/', InvoiceDetailView.as_view(), name='details'),
 ]  
