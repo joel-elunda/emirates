@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', login_required(TemplateView.as_view(template_name='index.html')), name='home'),
     path('plate/', include('plate.urls'), name='plate'),
     path('invoice/', include('invoice.urls'), name='invoice'),
     path('room/', include('room.urls'), name='room'),
